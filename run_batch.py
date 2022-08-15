@@ -23,7 +23,7 @@ if __name__ == "__main__":
     
     
     species = ['OAH1','SAN1', 'AUS1','ICE1','KUW1','NIG1','SAH1','DET']
-    nprimepath = 'stramski_2007_mineral_nprime.csv'
+    nprimepath = '/nobackup/jakravit/git/twoLay_parallel/stramski_2007_mineral_nprime.csv'
     nprime = pd.read_csv(nprimepath,index_col=0)
     
     # phytos = phytodata.Species
