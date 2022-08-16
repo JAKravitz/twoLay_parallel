@@ -122,11 +122,26 @@ if __name__ == "__main__":
                                            data[species][rname]['nreal'], 
                                            data[species][rname]['jexp'], 
                                            data[species][rname]['dmax'], 
-                                           data[species][rname]['rho'],)
-            for p in result0.keys():
-                data[species][rname][p] = result0[p]
-            
+                                           data[species][rname]['rho'],
+                                          )
+#             for p in result0.keys():
+#                 data[species][rname][p] = result0[p]
+            data[species][rname] = result0
         data[species] = dask.compute(data[species])[0]
+        
+        for i, rname in enumerate(data[species].keys()):
+            result = {}
+            for param in parameters:
+                result[param] = data[species][rname][param]
+            
+            # add run info
+            result['nreal'] = iterlist[i]['nreal']
+            result['jexp'] = iterlist[i]['jexp']
+            result['dmax'] = iterlist[i]['dmax']
+            result['rho'] = iterlist[i]['rho']    
+            
+            # finish
+            data[species][rname] = result
         
         #end timer
         end = time.time()
